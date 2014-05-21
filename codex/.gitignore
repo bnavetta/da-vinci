@@ -1,0 +1,4 @@
+*.pyc
+
+build/
+da_vinci_codex.egg-info/

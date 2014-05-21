@@ -1,0 +1,52 @@
+\documentclass{article}
+
+\usepackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+\usepackage{pythontex}
+
+\begin{pycode}
+import da_vinci
+
+da_vinci.init(pytex)
+da_vinci.init_tables()
+da_vinci.init_figures()
+
+print(da_vinci.preamble())
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+
+df = pd.DataFrame({
+    'foo': np.random.rand(10),
+    'bar': np.random.rand(10)
+})
+data = da_vinci.Data(df, names = {'foo': 'Foo', 'bar': 'Bar'})
+
+\end{pycode}
+\printpythontex
+
+\begin{document}
+
+\section{Tables}
+Da Vinci can generate \LaTeX{} tables from Data objects. A Data object combines a Pandas DataFrame with display information such as human-friendly
+column names and formatters.
+
+\py{da_vinci.latex_table(data)}
+% \pyc{print(da_vinci.latex_table(data))}
+
+\section{Figures}
+
+\begin{pycode}
+plt.scatter(data["foo"], data["bar"], c="b")
+print(da_vinci.latex_figure("foo_bar_plot"))
+\end{pycode}
+
+Da Vinci also helps displaying PyPlot figures. The figures are saved into the generated file directory and tracked using PythonTex's created-file support.
+
+
+
+% Also add: snippets for useful things like a header suitable for a school assignment, hiding section and page numbers, etc.
+
+\end{document}
