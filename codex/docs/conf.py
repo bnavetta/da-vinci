@@ -84,6 +84,13 @@ pygments_style = 'sphinx'
 # If true, keep warnings as "system message" paragraphs in the built documents.
 #keep_warnings = False
 
+# intersphinx setup
+intersphinx_mapping = {
+    'python': ('http://docs.python.org/2', None),
+    'pandas': ('http://pandas.pydata.org/pandas-docs/stable', None),
+    'numpy': ('http://docs.scipy.org/doc/numpy', None),
+    'matplotlib': ('http://matplotlib.org', None)
+}
 
 # -- Options for HTML output ----------------------------------------------
 
@@ -317,7 +324,3 @@ epub_exclude_files = ['search.html']
 
 # If false, no index is generated.
 #epub_use_index = True
-
-
-# Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'http://docs.python.org/': None}

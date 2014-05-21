@@ -43,7 +43,7 @@ def docs(options):
 	"""Build Sphinx documentation"""
 	doc_dir = options.docs.doc_dir
 	build_root = options.docs.build_root
-	for builder in ["html", "latex", "man", "texinfo"]:
+	for builder in ["html", "latex", "man", "texinfo", "epub"]:
 		build_dir = build_root / builder
 		build_dir.makedirs_p()
 		sphinx_args = ["-b", builder, doc_dir, build_dir]

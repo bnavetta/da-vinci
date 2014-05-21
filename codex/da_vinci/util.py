@@ -4,10 +4,15 @@ import math
 # The code was originally adapted from WebKit's JavaScript Number.toPrecision
 def significant_figures(x, p):
 	"""
-	returns a string representation of x formatted with a precision of p
+	Format a number with a given precision (significant digits). If necessary, scientific notation format will be used.
 
-	Based on the webkit javascript implementation taken from here:
-	https://code.google.com/p/webkit-mirror/source/browse/JavaScriptCore/kjs/number_object.cpp
+	Based on the `Webkit JavaScript implementation <https://webkit.googlesource.com/WebKit/+/master/Source/WTF/wtf/dtoa/double-conversion.cc>`_
+	ported to Python by `Randle Taylor <http://randlet.com/blog/python-significant-figures-format/>`_
+
+	:param x: A numerical value to format
+	:param p: The number of significant figures to use
+	:return: The formatted number
+	:rytpe: str
 	"""
 
 	x = float(x)
@@ -60,6 +65,14 @@ def significant_figures(x, p):
 
 	return "".join(out)
 
-# Based on https://github.com/gpoore/pythontex/wiki/matplotlib
-def latex_environment(name, content='', options=''):
-	return "\\begin{%s}%s\n%s\n\\end{%s}" % (name, options, content, name)
+def latex_environment(name, content='', options=None):
+	"""
+	Format a LaTeX environment. Based on the `PythonTex wiki example <https://github.com/gpoore/pythontex/wiki/matplotlib>`_
+
+	:param str name: The name of the environment, such as `align` or `itemize`
+	:param str content: The content to put inside the environment
+	:param str options: Any options for the environment, without square braces
+	:return: A LaTex environment with the given name, content, and options
+	:rtype: str
+	"""
+	return "\\begin{%s}%s\n%s\n\\end{%s}" % (name, '[' + options + ']' if options else '', content , name)
