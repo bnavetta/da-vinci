@@ -2,3 +2,13 @@
 build/
 .gradle/
 
+# LaTeX files
+*.aux
+*.log
+*.pdf
+
+# Bibliography files
+*.bbl
+*.bcf
+*.blg
+*.run.xml

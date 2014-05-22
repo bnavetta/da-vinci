@@ -23,15 +23,8 @@ public class LaTeXCompiler implements Compiler<LaTeXCompileSpec>
 {
 	private static final Logger LOG = LoggerFactory.getLogger(LaTeXCompiler.class);
 
-	private final CompileSpecToArguments<LaTeXCompileSpec> argumentsGenerator;
-
 	private ByteArrayOutputStream compilerOut;
 	private ByteArrayOutputStream compilerErr;
-
-	public LaTeXCompiler()
-	{
-		argumentsGenerator = new LaTeXCompilerArgumentsGenerator();
-	}
 
 	@Override
 	public WorkResult execute(LaTeXCompileSpec compileSpec)
@@ -65,9 +58,28 @@ public class LaTeXCompiler implements Compiler<LaTeXCompileSpec>
 	private ExecHandle createHandle(LaTeXCompileSpec spec)
 	{
 		ExecHandleBuilder builder = new ExecHandleBuilder();
+
+		spec.getEngine().generateArgs(builder, spec);
+
+		if(spec.getExtraInputs().containsKey(LaTeXCompileSpec.LATEX_INPUT))
+		{
+			String path = spec.getExtraInputs().get(LaTeXCompileSpec.LATEX_INPUT).getAsPath();
+			builder.environment("TEXINPUTS", path + File.pathSeparator + System.getenv("TEXINPUTS"));
+		}
+		if(spec.getExtraInputs().containsKey(LaTeXCompileSpec.BIBLATEX_INPUT))
+		{
+			String path = spec.getExtraInputs().get(LaTeXCompileSpec.BIBLATEX_INPUT).getAsPath();
+			builder.environment("BIBINPUTS", path + File.pathSeparator + System.getenv("BIBINPUTS"));
+		}
+		if(spec.getExtraInputs().containsKey(LaTeXCompileSpec.PYTHON_INPUT))
+		{
+			String path = spec.getExtraInputs().get(LaTeXCompileSpec.PYTHON_INPUT).getAsPath();
+			builder.environment("PYTHONPATH", path + File.pathSeparator + System.getenv("PYTHONPATH"));
+		}
+
 		builder.setWorkingDir(spec.getLatexFile().getParentFile());
 		builder.setExecutable(spec.getEngine().getExecutable());
-		argumentsGenerator.collectArguments(spec, new ExecSpecBackedArgCollector(builder));
+		builder.args(spec.getArguments());
 		builder.setIgnoreExitValue(true);
 
 		compilerOut = new ByteArrayOutputStream();

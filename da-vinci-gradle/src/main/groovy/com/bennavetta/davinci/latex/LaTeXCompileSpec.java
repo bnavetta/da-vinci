@@ -26,7 +26,7 @@ public class LaTeXCompileSpec implements CompileSpec
 	 * The extra input name for LaTeX inputs other than the main file. This is used to set the {@code TEXINPUTS} environment
 	 * variable, so it is useful for custom styles and modular documents.
 	 */
-	public static final String LATEX_INPUTS = "latex";
+	public static final String LATEX_INPUT = "latex";
 
 	private File destinationDir;
 

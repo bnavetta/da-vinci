@@ -14,11 +14,13 @@ public interface Engine
 	public File getExecutable();
 
 	/**
-	 * Generate command-line arguments to compile the given {@link LaTeXCompileSpec} with this {@link Engine}.
+	 * Configure an {@link ExecSpec} to compile the given {@link LaTeXCompileSpec} with this {@link Engine}. The executable, working directory,
+	 * and streams are already configured, so this method only needs to set up and streams are already configured, so this method only needs to set up
+	 * environment variables and arguments besides those specified by the user.
 	 * @param compileSpec the compile spec
-	 * @return the command-line arguments
+	 * @param execSpec the execution spec
 	 */
-	public Iterable<String> generateArgs(LaTeXCompileSpec compileSpec);
+	public void generateArgs(ExecSpec execSpec, LaTeXCompileSpec compileSpec);
 
 	/**
 	 * Check if LaTeX needs to be rerun. This is mostly to handle updating references from packages like BibLaTeX and
