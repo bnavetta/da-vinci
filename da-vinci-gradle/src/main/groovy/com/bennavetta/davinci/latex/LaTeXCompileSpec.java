@@ -1,5 +1,7 @@
 package com.bennavetta.davinci.latex;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import org.gradle.api.file.FileCollection;
 import org.gradle.api.internal.tasks.compile.CompileSpec;
 
@@ -30,12 +32,12 @@ public class LaTeXCompileSpec implements CompileSpec
 
 	private File destinationDir;
 
-	private Map<String, FileCollection> extraInputs;
+	private Map<String, FileCollection> extraInputs = Maps.newHashMap();
 
 	private File latexFile;
 
 	private Engine engine;
-	private List<String> arguments;
+	private List<String> arguments = Lists.newArrayList();
 
 	/**
 	 * Returns the output directory for LaTeX compilation. This is where generated {@code .log}, {@code .aux}, {@code .pdf}, and
