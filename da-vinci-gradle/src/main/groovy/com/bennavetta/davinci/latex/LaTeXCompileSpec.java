@@ -83,4 +83,29 @@ public class LaTeXCompileSpec implements CompileSpec
 	{
 		return engine;
 	}
+	
+	public void setDestinationDir(File destinationDir)
+	{
+		this.destinationDir = destinationDir;
+	}
+
+	public void setExtraInputs(Map<String, FileCollection> extraInputs)
+	{
+		this.extraInputs = extraInputs;
+	}
+
+	public void setLatexFile(File latexFile)
+	{
+		this.latexFile = latexFile;
+	}
+
+	public void setEngine(Engine engine)
+	{
+		this.engine = engine;
+	}
+
+	public void setArguments(List<String> arguments)
+	{
+		this.arguments = arguments;
+	}
 }

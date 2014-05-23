@@ -1,10 +1,12 @@
 package com.bennavetta.davinci.latex;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.nio.charset.Charset;
+
 import org.gradle.api.internal.tasks.SimpleWorkResult;
 import org.gradle.api.internal.tasks.compile.CompilationFailedException;
-import org.gradle.api.internal.tasks.compile.CompileSpecToArguments;
 import org.gradle.api.internal.tasks.compile.Compiler;
-import org.gradle.api.internal.tasks.compile.ExecSpecBackedArgCollector;
 import org.gradle.api.tasks.WorkResult;
 import org.gradle.process.ExecResult;
 import org.gradle.process.internal.ExecHandle;
@@ -12,9 +14,7 @@ import org.gradle.process.internal.ExecHandleBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.nio.charset.Charset;
+import com.google.common.base.Strings;
 
 /**
  * Compiles LaTeX. This corresponds directly to a LaTeX engine. It does not handle other processors or reruns.
@@ -61,20 +61,26 @@ public class LaTeXCompiler implements Compiler<LaTeXCompileSpec>
 
 		spec.getEngine().generateArgs(builder, spec);
 
+		/*
+		 * Environment variable setup works like this
+		 * - Prepend the specified extra inputs to whatever is already set
+		 * - if nothing is set, the value should end with the platform path separator (i.e. ":")
+		 *     -> this is important because otherwise LaTeX won't use the default *INPUTS variable, which contains all the standard packages
+		 */
 		if(spec.getExtraInputs().containsKey(LaTeXCompileSpec.LATEX_INPUT))
 		{
 			String path = spec.getExtraInputs().get(LaTeXCompileSpec.LATEX_INPUT).getAsPath();
-			builder.environment("TEXINPUTS", path + File.pathSeparator + System.getenv("TEXINPUTS"));
+			builder.environment("TEXINPUTS", path + File.pathSeparator + Strings.nullToEmpty(System.getenv("TEXINPUTS")));
 		}
 		if(spec.getExtraInputs().containsKey(LaTeXCompileSpec.BIBLATEX_INPUT))
 		{
 			String path = spec.getExtraInputs().get(LaTeXCompileSpec.BIBLATEX_INPUT).getAsPath();
-			builder.environment("BIBINPUTS", path + File.pathSeparator + System.getenv("BIBINPUTS"));
+			builder.environment("BIBINPUTS", path + File.pathSeparator + Strings.nullToEmpty(System.getenv("BIBINPUTS")));
 		}
 		if(spec.getExtraInputs().containsKey(LaTeXCompileSpec.PYTHON_INPUT))
 		{
 			String path = spec.getExtraInputs().get(LaTeXCompileSpec.PYTHON_INPUT).getAsPath();
-			builder.environment("PYTHONPATH", path + File.pathSeparator + System.getenv("PYTHONPATH"));
+			builder.environment("PYTHONPATH", path + File.pathSeparator + Strings.nullToEmpty(System.getenv("PYTHONPATH")));
 		}
 
 		builder.setWorkingDir(spec.getLatexFile().getParentFile());
