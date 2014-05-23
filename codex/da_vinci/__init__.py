@@ -1,13 +1,13 @@
 __version__ = '1.0'
 
-from base import *
-from util import *
-from data import *
+from da_vinci.base import *
+from da_vinci.util import *
+from da_vinci.data import *
 
 try:
 	import matplotlib
-	from figure import *
+	from da_vinci.figure import *
 except ImportError as e:
 	pass
 
-from table import *
+from da_vinci.table import *

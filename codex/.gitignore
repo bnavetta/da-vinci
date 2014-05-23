@@ -1,4 +1,4 @@
 *.pyc
 
 build/
-da_vinci_codex.egg-info/
+da_vinci.egg-info/

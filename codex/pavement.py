@@ -1,8 +1,10 @@
+import sys, os
+
 from paver.easy import *
 import paver.doctools
-
 from paver.setuputils import setup, install_distutils_tasks
-from sphinxcontrib import paverutils
+
+sys.path.append(os.getcwd())
 from da_vinci import __version__
 
 install_distutils_tasks()
