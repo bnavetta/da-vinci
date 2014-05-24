@@ -1,8 +1,8 @@
-package com.bennavetta.davinci.latex.internal;
+package com.bennavetta.davinci.latex.engine;
 
-import com.bennavetta.davinci.latex.Engine;
 import com.bennavetta.davinci.latex.LaTeXCompileSpec;
 import com.google.common.collect.ImmutableList;
+
 import org.gradle.internal.os.OperatingSystem;
 import org.gradle.process.ExecSpec;
 import org.gradle.util.GFileUtils;

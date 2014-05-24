@@ -1,7 +1,9 @@
 package com.bennavetta.davinci.latex;
 
+import com.bennavetta.davinci.latex.engine.Engine;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+
 import org.gradle.api.file.FileCollection;
 import org.gradle.api.internal.tasks.compile.CompileSpec;
 

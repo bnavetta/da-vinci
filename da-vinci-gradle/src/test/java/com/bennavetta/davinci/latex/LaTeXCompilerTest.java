@@ -23,6 +23,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import com.bennavetta.davinci.latex.engine.Engine;
 import com.google.common.collect.ImmutableMap;
 
 public class LaTeXCompilerTest extends AbstractLaTeXTest

@@ -1,6 +1,8 @@
-package com.bennavetta.davinci.latex;
+package com.bennavetta.davinci.latex.engine;
 
 import org.gradle.process.ExecSpec;
+
+import com.bennavetta.davinci.latex.LaTeXCompileSpec;
 
 import java.io.File;
 

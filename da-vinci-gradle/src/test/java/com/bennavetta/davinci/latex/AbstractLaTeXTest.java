@@ -9,7 +9,7 @@ import org.junit.rules.TemporaryFolder;
 import com.google.common.base.Charsets;
 import com.google.common.io.Files;
 
-public class AbstractLaTeXTest
+public abstract class AbstractLaTeXTest
 {
 	@Rule
 	public final TemporaryFolder temporaryFolder = new TemporaryFolder();

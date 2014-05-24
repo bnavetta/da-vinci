@@ -1,4 +1,4 @@
-package com.bennavetta.davinci.latex.internal;
+package com.bennavetta.davinci.latex.engine;
 
 /**
  * The XeTeX engine, usually available as {@code xelatex}

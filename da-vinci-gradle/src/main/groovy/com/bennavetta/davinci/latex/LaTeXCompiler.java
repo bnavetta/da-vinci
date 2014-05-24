@@ -14,6 +14,7 @@ import org.gradle.process.internal.ExecHandleBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.bennavetta.davinci.latex.engine.Engine;
 import com.google.common.base.Strings;
 
 /**
