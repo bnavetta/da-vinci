@@ -11,3 +11,4 @@ except ImportError as e:
 	pass
 
 from da_vinci.table import *
+from da_vinci.vars import *
